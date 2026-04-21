@@ -1,34 +1,35 @@
 import { Router } from 'express';
 import { buildingData } from '../data/index.js';
 import { requireAdmin } from '../middleware/auth.js';
+import { createApiHandler } from '../utils/api-response.js';
 
 const router = Router();
 
-router.post('/admin/buildings', requireAdmin, async (req, res) => {
-  try {
-    const result = await buildingData.createBuilding(req.body, req.session.user._id);
-    res.status(201).json({ success: true, data: result });
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-});
+router.post(
+  '/admin/buildings',
+  requireAdmin,
+  createApiHandler(
+    async (req) => buildingData.createBuilding(req.body, req.session.user._id),
+    { successStatus: 201, errorStatus: 400 }
+  )
+);
 
-router.put('/admin/buildings/:id', requireAdmin, async (req, res) => {
-  try {
-    const result = await buildingData.updateBuilding(req.params.id, req.body, req.session.user._id);
-    res.json({ success: true, data: result });
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-});
+router.put(
+  '/admin/buildings/:id',
+  requireAdmin,
+  createApiHandler(
+    async (req) => buildingData.updateBuilding(req.params.id, req.body, req.session.user._id),
+    { errorStatus: 400 }
+  )
+);
 
-router.delete('/admin/buildings/:id', requireAdmin, async (req, res) => {
-  try {
-    const result = await buildingData.deleteBuilding(req.params.id);
-    res.json({ success: true, data: result });
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-});
+router.delete(
+  '/admin/buildings/:id',
+  requireAdmin,
+  createApiHandler(
+    async (req) => buildingData.deleteBuilding(req.params.id),
+    { errorStatus: 400 }
+  )
+);
 
 export default router;
