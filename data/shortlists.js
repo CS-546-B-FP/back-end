@@ -1,7 +1,12 @@
 import { ObjectId } from 'mongodb';
 import xss from 'xss';
 import { shortlists } from '../config/mongoCollections.js';
-import { checkString, checkId } from './validation.js';
+import {
+  VALIDATION_LIMITS,
+  checkBoundedText,
+  checkId,
+  checkOptionalBoundedText
+} from './validation.js';
 
 export const getShortlistsByUser = async (userId) => {
   userId = checkId(userId, 'userId');
@@ -11,7 +16,9 @@ export const getShortlistsByUser = async (userId) => {
 
 export const createShortlist = async (userId, shortlistName) => {
   userId = checkId(userId, 'userId');
-  shortlistName = checkString(shortlistName, 'shortlistName');
+  shortlistName = checkBoundedText(shortlistName, 'shortlistName', {
+    maxLength: VALIDATION_LIMITS.shortlistNameMaxLength
+  });
   const now = new Date();
   const col = await shortlists();
   const { insertedId } = await col.insertOne({
@@ -42,7 +49,11 @@ export const updateItemNote = async (shortlistId, userId, buildingId, privateNot
   shortlistId = checkId(shortlistId, 'shortlistId');
   userId = checkId(userId, 'userId');
   buildingId = checkId(buildingId, 'buildingId');
-  privateNote = xss(checkString(privateNote, 'privateNote'));
+  privateNote = xss(
+    checkOptionalBoundedText(privateNote, 'privateNote', {
+      maxLength: VALIDATION_LIMITS.privateNoteMaxLength
+    })
+  );
   const col = await shortlists();
   const result = await col.findOneAndUpdate(
     { _id: new ObjectId(shortlistId), userId: new ObjectId(userId), 'items.buildingId': new ObjectId(buildingId) },

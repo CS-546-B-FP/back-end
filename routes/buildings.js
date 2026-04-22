@@ -9,13 +9,14 @@ router.get('/buildings', async (req, res) => {
   try {
     const { search, borough, page, limit } = req.query;
     const result = await buildingData.getAllBuildings({
-      search, borough,
-      page: page ? parseInt(page) : 1,
-      limit: limit ? parseInt(limit) : 20
+      search,
+      borough,
+      page,
+      limit
     });
     res.json({ success: true, data: result });
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(typeof e === 'string' ? 400 : 500).json({ error: e });
   }
 });
 

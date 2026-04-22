@@ -1,14 +1,22 @@
 import { ObjectId } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { users } from '../config/mongoCollections.js';
-import { checkString, checkId, checkEmail } from './validation.js';
+import {
+  checkString,
+  checkId,
+  checkEmail,
+  checkUsername,
+  checkPassword,
+  checkRole
+} from './validation.js';
 
 export const createUser = async (firstName, lastName, email, username, password, role = 'user') => {
   firstName = checkString(firstName, 'firstName');
   lastName = checkString(lastName, 'lastName');
   email = checkEmail(email);
-  username = checkString(username, 'username');
-  password = checkString(password, 'password');
+  username = checkUsername(username, 'username');
+  password = checkPassword(password, 'password');
+  role = checkRole(role, 'role');
 
   const col = await users();
   if (await col.findOne({ $or: [{ email }, { username }] }))
@@ -24,8 +32,8 @@ export const createUser = async (firstName, lastName, email, username, password,
 };
 
 export const loginUser = async (username, password) => {
-  username = checkString(username, 'username');
-  password = checkString(password, 'password');
+  username = checkUsername(username, 'username');
+  password = checkPassword(password, 'password', { enforceStrength: false });
 
   const col = await users();
   const user = await col.findOne({ username });
