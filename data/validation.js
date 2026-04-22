@@ -189,17 +189,18 @@ export const checkEmail = (email, name = 'email', options = {}) => {
 };
 
 export const checkUsername = (username, name = 'username', options = {}) => {
+  const { lowercase = true, ...stringOptions } = options;
   username = normalizeString(username, name, {
     minLength: VALIDATION_LIMITS.usernameMinLength,
     maxLength: VALIDATION_LIMITS.usernameMaxLength,
-    ...options
+    ...stringOptions
   });
 
   if (!USERNAME_REGEX.test(username) || username.startsWith('.') || username.endsWith('.')) {
     throw `${name} can only use letters, numbers, periods, underscores, and hyphens`;
   }
 
-  return username;
+  return lowercase ? username.toLowerCase() : username;
 };
 
 export const checkPassword = (
