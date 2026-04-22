@@ -1,3 +1,7 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import { closeConnection } from "../config/mongoConnection.js";
 import {
   users,
@@ -15,9 +19,14 @@ import {
   updateItemNote,
 } from "../data/shortlists.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const seed = async () => {
   try {
+    // ----------------------------
     // Clear existing data
+    // ----------------------------
     const reviewCollection = await reviews();
     const shortlistCollection = await shortlists();
     const buildingCollection = await buildings();
@@ -72,142 +81,31 @@ const seed = async () => {
     console.log("Users seeded.");
 
     // ----------------------------
-    // Seed buildings
+    // Seed buildings from JSON
     // ----------------------------
-    const building1 = await createBuilding(
-      {
-        buildingName: "The Hudson Arms",
-        streetAddress: "123 W 110th St",
-        borough: "Manhattan",
-        neighborhood: "Morningside Heights",
-        zipCode: "10026",
-        bin: "1000001",
-        bbl: "1012340001",
-        ownerName: "Hudson Property LLC",
-        managerName: "CityLine Management",
-        riskSummary: {
-          highlights: ["Repeated heat complaints", "Open severe violations"],
-          lastCalculatedAt: new Date("2026-03-10T12:00:00Z"),
-        },
-        housingRecords: [
-          {
-            sourceDataset: "Housing Maintenance Code Complaints and Problems",
-            recordType: "complaint",
-            category: "heat/hot water",
-            status: "open",
-            recordDate: new Date("2026-03-10T00:00:00Z"),
-          },
-          {
-            sourceDataset: "Housing Maintenance Code Violations",
-            recordType: "violation",
-            category: "mold",
-            status: "open",
-            recordDate: new Date("2026-02-21T00:00:00Z"),
-          },
-        ],
-      },
-      admin._id,
-    );
+    const buildingsPath = path.join(__dirname, "seed-data", "buildings.json");
+    const buildingsData = JSON.parse(fs.readFileSync(buildingsPath, "utf8"));
 
-    const building2 = await createBuilding(
-      {
-        buildingName: "Riverside Court",
-        streetAddress: "455 Riverside Dr",
-        borough: "Manhattan",
-        neighborhood: "Hamilton Heights",
-        zipCode: "10031",
-        bin: "1000002",
-        bbl: "1012340002",
-        ownerName: "Riverside Homes Inc",
-        managerName: "Metro Property Services",
-        riskSummary: {
-          highlights: ["Bedbug history reported in prior year"],
-          lastCalculatedAt: new Date("2026-03-08T10:30:00Z"),
-        },
-        housingRecords: [
-          {
-            sourceDataset: "Bedbug Reporting",
-            recordType: "bedbug report",
-            category: "bedbugs",
-            status: "resolved",
-            recordDate: new Date("2025-11-15T00:00:00Z"),
-          },
-          {
-            sourceDataset: "Housing Maintenance Code Complaints and Problems",
-            recordType: "complaint",
-            category: "repairs",
-            status: "closed",
-            recordDate: new Date("2026-01-18T00:00:00Z"),
-          },
-        ],
-      },
-      admin._id,
-    );
+    if (!Array.isArray(buildingsData) || buildingsData.length === 0) {
+      throw new Error("buildings.json is missing or empty.");
+    }
 
-    const building3 = await createBuilding(
-      {
-        buildingName: "Brooklyn Terrace",
-        streetAddress: "88 Flatbush Ave",
-        borough: "Brooklyn",
-        neighborhood: "Downtown Brooklyn",
-        zipCode: "11217",
-        bin: "2000001",
-        bbl: "3012340001",
-        ownerName: "Brooklyn Terrace Group",
-        managerName: "Harbor Management NYC",
-        riskSummary: {
-          highlights: ["Litigation activity on record"],
-          lastCalculatedAt: new Date("2026-03-05T09:00:00Z"),
-        },
-        housingRecords: [
-          {
-            sourceDataset: "Housing Litigations",
-            recordType: "litigation",
-            category: "tenant action",
-            status: "open",
-            recordDate: new Date("2026-02-12T00:00:00Z"),
-          },
-          {
-            sourceDataset: "Housing Maintenance Code Violations",
-            recordType: "violation",
-            category: "elevator",
-            status: "resolved",
-            recordDate: new Date("2026-01-28T00:00:00Z"),
-          },
-        ],
-      },
-      admin._id,
-    );
+    const createdBuildings = [];
 
-    const building4 = await createBuilding(
-      {
-        buildingName: "Queens Garden Plaza",
-        streetAddress: "240-15 Union Tpke",
-        borough: "Queens",
-        neighborhood: "Bayside",
-        zipCode: "11364",
-        bin: "4000001",
-        bbl: "4012340001",
-        ownerName: "Queens Garden Realty",
-        managerName: "Eastborough Residential",
-        riskSummary: {
-          highlights: ["Low recent complaint volume"],
-          lastCalculatedAt: new Date("2026-03-01T08:45:00Z"),
-        },
-        housingRecords: [
-          {
-            sourceDataset: "Multiple Dwelling Registrations",
-            recordType: "registration",
-            category: "registration active",
-            status: "active",
-            recordDate: new Date("2026-01-01T00:00:00Z"),
-          },
-        ],
-      },
-      admin._id,
-    );
+    for (const building of buildingsData) {
+      const created = await createBuilding(building, admin._id);
+      createdBuildings.push(created);
+    }
 
-    console.log("Buildings seeded.");
+    console.log(`Buildings seeded: ${createdBuildings.length}`);
+
+    if (createdBuildings.length < 4) {
+      throw new Error(
+        "Need at least 4 buildings in buildings.json for reviews and shortlists.",
+      );
+    }
+
+    const [building1, building2, building3, building4] = createdBuildings;
 
     // ----------------------------
     // Seed reviews
@@ -269,6 +167,7 @@ const seed = async () => {
       cindy._id,
       "My Apartment Hunt",
     );
+
     await addItemToShortlist(cindyShortlist._id, cindy._id, building1._id);
     await addItemToShortlist(cindyShortlist._id, cindy._id, building2._id);
     await addItemToShortlist(cindyShortlist._id, cindy._id, building4._id);
@@ -296,6 +195,7 @@ const seed = async () => {
       peter._id,
       "Buildings to Compare",
     );
+
     await addItemToShortlist(peterShortlist._id, peter._id, building2._id);
     await addItemToShortlist(peterShortlist._id, peter._id, building3._id);
 
