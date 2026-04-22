@@ -1,17 +1,48 @@
 import { ObjectId } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { users } from '../config/mongoCollections.js';
-import { checkString, checkId, checkEmail } from './validation.js';
+import {
+  checkString,
+  checkId,
+  checkEmail,
+  checkUsername,
+  checkPassword,
+  checkRole
+} from './validation.js';
+
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const buildCaseInsensitiveExactMatch = (value) =>
+  new RegExp(`^${escapeRegex(value)}$`, 'i');
+
+const normalizeLoginCredential = (value) =>
+  String(value).includes('@')
+    ? {
+        field: 'email',
+        value: checkEmail(value, 'email')
+      }
+    : {
+        field: 'username',
+        value: checkUsername(value, 'username')
+      };
 
 export const createUser = async (firstName, lastName, email, username, password, role = 'user') => {
   firstName = checkString(firstName, 'firstName');
   lastName = checkString(lastName, 'lastName');
   email = checkEmail(email);
-  username = checkString(username, 'username');
-  password = checkString(password, 'password');
+  username = checkUsername(username, 'username');
+  password = checkPassword(password, 'password');
+  role = checkRole(role, 'role');
 
   const col = await users();
-  if (await col.findOne({ $or: [{ email }, { username }] }))
+  if (
+    await col.findOne({
+      $or: [
+        { email: buildCaseInsensitiveExactMatch(email) },
+        { username: buildCaseInsensitiveExactMatch(username) }
+      ]
+    })
+  )
     throw 'email or username already taken';
 
   const hashedPassword = await bcrypt.hash(password, 12);
@@ -24,11 +55,13 @@ export const createUser = async (firstName, lastName, email, username, password,
 };
 
 export const loginUser = async (username, password) => {
-  username = checkString(username, 'username');
-  password = checkString(password, 'password');
+  const credential = normalizeLoginCredential(username);
+  password = checkPassword(password, 'password', { enforceStrength: false });
 
   const col = await users();
-  const user = await col.findOne({ username });
+  const user = await col.findOne({
+    [credential.field]: buildCaseInsensitiveExactMatch(credential.value)
+  });
   if (!user || !(await bcrypt.compare(password, user.hashedPassword)))
     throw 'invalid username or password';
 

@@ -8,15 +8,21 @@ const router = Router();
 
 router.get(
   '/buildings',
-  createApiHandler(async (req) => {
-    const { search, borough, page, limit } = req.query;
-    return buildingData.getAllBuildings({
-      search,
-      borough,
-      page: page ? parseInt(page) : 1,
-      limit: limit ? parseInt(limit) : 20
-    });
-  })
+  createApiHandler(
+    async (req) => {
+      const { search, borough, page, limit } = req.query;
+
+      return buildingData.getAllBuildings({
+        search,
+        borough,
+        page,
+        limit
+      });
+    },
+    {
+      getErrorStatus: (error) => (typeof error === 'string' ? 400 : 500)
+    }
+  )
 );
 
 router.get(

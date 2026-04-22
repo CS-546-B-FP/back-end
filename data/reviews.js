@@ -1,7 +1,13 @@
 import { ObjectId } from 'mongodb';
 import xss from 'xss';
 import { reviews } from '../config/mongoCollections.js';
-import { checkString, checkId, checkInt } from './validation.js';
+import {
+  VALIDATION_LIMITS,
+  checkBoundedText,
+  checkId,
+  checkInt,
+  checkIssueTags
+} from './validation.js';
 
 export const getReviewsByBuilding = async (buildingId) => {
   buildingId = checkId(buildingId, 'buildingId');
@@ -13,8 +19,13 @@ export const getReviewsByBuilding = async (buildingId) => {
 export const createReview = async (buildingId, userId, reviewText, rating, issueTags = []) => {
   buildingId = checkId(buildingId, 'buildingId');
   userId = checkId(userId, 'userId');
-  reviewText = xss(checkString(reviewText, 'reviewText'));
+  reviewText = xss(
+    checkBoundedText(reviewText, 'reviewText', {
+      maxLength: VALIDATION_LIMITS.reviewTextMaxLength
+    })
+  );
   checkInt(rating, 'rating', 1, 5);
+  issueTags = checkIssueTags(issueTags, 'issueTags');
   const now = new Date();
   const col = await reviews();
   const { insertedId } = await col.insertOne({
@@ -30,8 +41,13 @@ export const createReview = async (buildingId, userId, reviewText, rating, issue
 export const updateReview = async (id, userId, reviewText, rating, issueTags) => {
   id = checkId(id);
   userId = checkId(userId, 'userId');
-  reviewText = xss(checkString(reviewText, 'reviewText'));
+  reviewText = xss(
+    checkBoundedText(reviewText, 'reviewText', {
+      maxLength: VALIDATION_LIMITS.reviewTextMaxLength
+    })
+  );
   checkInt(rating, 'rating', 1, 5);
+  issueTags = checkIssueTags(issueTags ?? [], 'issueTags');
   const col = await reviews();
   const result = await col.findOneAndUpdate(
     { _id: new ObjectId(id), userId: new ObjectId(userId) },

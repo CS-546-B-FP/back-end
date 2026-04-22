@@ -1,0 +1,1178 @@
+[
+  {
+    "buildingName": "",
+    "streetAddress": "198-06 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232261",
+    "bbl": "10865-3",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "219-40 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230917",
+    "bbl": "10773-121",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-33 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230849",
+    "bbl": "10768-46",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "222-18 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4231311",
+    "bbl": "10803-8",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-50 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4456931",
+    "bbl": "10767-28",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-40 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230676",
+    "bbl": "10761-25",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 418747",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "193-01 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231778",
+    "bbl": "10840-1",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "193-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232145",
+    "bbl": "10860-44",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "193-16 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232146",
+    "bbl": "10860-47",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "193-17 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231789",
+    "bbl": "10840-31",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "194-01 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231804",
+    "bbl": "10841-34",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "194-02 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232169",
+    "bbl": "10861-27",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "194-03 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231803",
+    "bbl": "10841-32",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "194-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232171",
+    "bbl": "10861-33",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "195-15 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231823",
+    "bbl": "10842-28",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "196-06 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232205",
+    "bbl": "10863-3",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "196-10 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232206",
+    "bbl": "10863-5",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "196-11 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231839",
+    "bbl": "10843-23",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "196-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232207",
+    "bbl": "10863-7",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "196-17 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231837",
+    "bbl": "10843-19",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "197-02 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232230",
+    "bbl": "10864-1",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "197-03 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231858",
+    "bbl": "10844-27",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "197-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232233",
+    "bbl": "10864-7",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "197-17 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231854",
+    "bbl": "10844-19",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 923406",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "197-18 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232234",
+    "bbl": "10864-9",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "198-09 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231868",
+    "bbl": "10845-23",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "198-12 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232263",
+    "bbl": "10865-6",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "198-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232264",
+    "bbl": "10865-7",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "199-03 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231892",
+    "bbl": "10846-26",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "200-02 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232317",
+    "bbl": "10867-1",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "200-18 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232320",
+    "bbl": "10867-9",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "201-07 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231923",
+    "bbl": "10848-24",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "201-11 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231922",
+    "bbl": "10848-22",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "201-14 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232347",
+    "bbl": "10868-7",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "201-17 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231920",
+    "bbl": "10848-18",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "201-18 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232348",
+    "bbl": "10868-9",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "202-02 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4232383",
+    "bbl": "10869-1",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "202-15 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231938",
+    "bbl": "10849-21",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-13 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4434674",
+    "bbl": "10768-56",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 419533",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "205-03 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231990",
+    "bbl": "10852-25",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-40 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230802",
+    "bbl": "10767-24",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-18 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230670",
+    "bbl": "10761-12",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-04 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230664",
+    "bbl": "10761-5",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-08 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230666",
+    "bbl": "10761-8",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 921392",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-28 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230673",
+    "bbl": "10761-17",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-08 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230796",
+    "bbl": "10767-10",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "203-19 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11423",
+    "bin": "4231956",
+    "bbl": "10850-18",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 926140",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "218-35 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230848",
+    "bbl": "10768-45",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  },
+  {
+    "buildingName": "",
+    "streetAddress": "217-10 100 AVENUE",
+    "borough": "Queens",
+    "neighborhood": "",
+    "zipCode": "11429",
+    "bin": "4230667",
+    "bbl": "10761-9",
+    "ownerName": "",
+    "managerName": "",
+    "riskSummary": {
+      "highlights": [],
+      "lastCalculatedAt": "2026-04-22T01:46:32.418Z"
+    },
+    "housingRecords": [
+      {
+        "sourceDataset": "Buildings Subject to HPD Jurisdiction",
+        "recordType": "registration",
+        "category": "HPD jurisdiction / registration 0",
+        "status": "active",
+        "recordDate": "2026-04-22T01:46:32.418Z"
+      }
+    ]
+  }
+]
