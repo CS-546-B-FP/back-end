@@ -1,10 +1,12 @@
+import { sendApiError } from '../utils/api-response.js';
+
 export const requireAuth = (req, res, next) => {
-  if (!req.session.user) return res.status(401).json({ error: 'not authenticated' });
+  if (!req.session.user) return sendApiError(res, 'not authenticated', { status: 401 });
   next();
 };
 
 export const requireAdmin = (req, res, next) => {
-  if (!req.session.user) return res.status(401).json({ error: 'not authenticated' });
-  if (req.session.user.role !== 'admin') return res.status(403).json({ error: 'forbidden' });
+  if (!req.session.user) return sendApiError(res, 'not authenticated', { status: 401 });
+  if (req.session.user.role !== 'admin') return sendApiError(res, 'forbidden', { status: 403 });
   next();
 };
