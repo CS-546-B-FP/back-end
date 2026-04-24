@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { reviewData } from '../data/index.js';
+import { reviewData, buildingData } from "../data/index.js";
 import { requireAuth } from '../middleware/auth.js';
 import { createApiHandler } from '../utils/api-response.js';
-import { buildingData } from '../data/index.js';
 
 const router = Router();
 
@@ -31,14 +30,14 @@ router.post(
       await buildingData.getBuildingById(buildingId);
 
       return reviewData.createReview(
-        req.params.id,
+        buildingId,
         req.session.user._id,
         reviewText,
         rating,
-        issueTags
+        issueTags,
       );
     },
-    { 
+    {
       successStatus: 201,
       getErrorStatus: (error) =>
         error === 'building not found' ? 404 : 400
