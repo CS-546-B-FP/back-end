@@ -45,8 +45,13 @@ router.post(
   '/watchlist/toggle',
   requireAuth,
   createApiHandler(
-    async (req) => userData.toggleWatchlist(req.session.user._id, req.body.buildingId),
-    { errorStatus: 400 }
+    async (req) => {
+      await buildingData.getBuildingById(req.body.buildingId);
+      return userData.toggleWatchlist(req.session.user._id, req.body.buildingId)
+    },
+    { getErrorStatus: (error) =>
+        error === 'building not found' ? 404 : 400
+    }
   )
 );
 
