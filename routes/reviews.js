@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { reviewData } from '../data/index.js';
+import { reviewData, buildingData } from "../data/index.js";
 import { requireAuth } from '../middleware/auth.js';
 import { createApiHandler } from '../utils/api-response.js';
 
@@ -8,8 +8,15 @@ const router = Router();
 router.get(
   '/buildings/:id/reviews',
   createApiHandler(
-    async (req) => reviewData.getReviewsByBuilding(req.params.id),
-    { errorStatus: 404 }
+    async (req) => {
+      const buildingId = req.params.id;
+      await buildingData.getBuildingById(buildingId);
+      return reviewData.getReviewsByBuilding(buildingId);
+    },
+    {
+      getErrorStatus: (error) =>
+        error === 'building not found' ? 404 : 400
+    }
   )
 );
 
@@ -19,15 +26,22 @@ router.post(
   createApiHandler(
     async (req) => {
       const { reviewText, rating, issueTags } = req.body;
+      const buildingId = req.params.id;
+      await buildingData.getBuildingById(buildingId);
+
       return reviewData.createReview(
-        req.params.id,
+        buildingId,
         req.session.user._id,
         reviewText,
         rating,
-        issueTags
+        issueTags,
       );
     },
-    { successStatus: 201, errorStatus: 400 }
+    {
+      successStatus: 201,
+      getErrorStatus: (error) =>
+        error === 'building not found' ? 404 : 400
+    }
   )
 );
 
