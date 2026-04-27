@@ -13,6 +13,18 @@ export const BOROUGH_VALUES = Object.freeze([
 
 export const USER_ROLE_VALUES = Object.freeze(['user', 'admin']);
 
+export const REVIEW_ISSUE_TAG_VALUES = Object.freeze([
+  'heat',
+  'pests',
+  'repairs',
+  'responsiveness',
+  'maintenance',
+  'violations',
+  'bedbugs',
+  'litigation',
+  'overall'
+]);
+
 export const VALIDATION_LIMITS = Object.freeze({
   textMaxLength: 5000,
   emailMaxLength: 254,
@@ -366,15 +378,34 @@ export const checkStringArray = (
   return normalized;
 };
 
-export const checkIssueTags = (val, name = 'issueTags', options = {}) =>
-  checkStringArray(val, name, {
+export const checkIssueTags = (val, name = 'issueTags', options = {}) => {
+  const {
+    maxItems = VALIDATION_LIMITS.issueTagMaxItems,
+    allowedValues: _allowedValuesIgnored,
+    caseInsensitive: _caseInsensitiveIgnored,
+    unique: _uniqueIgnored,
+    ...arrayOptions
+  } = options;
+  const normalizedTags = checkStringArray(val, name, {
     trim: true,
     caseInsensitive: true,
-    unique: true,
-    maxItems: VALIDATION_LIMITS.issueTagMaxItems,
+    allowedValues: REVIEW_ISSUE_TAG_VALUES,
+    maxItems,
     itemMaxLength: VALIDATION_LIMITS.issueTagMaxLength,
-    ...options
+    ...arrayOptions
   });
+  const uniqueTags = [];
+  const seen = new Set();
+
+  for (const tag of normalizedTags) {
+    if (!seen.has(tag)) {
+      seen.add(tag);
+      uniqueTags.push(tag);
+    }
+  }
+
+  return uniqueTags;
+};
 
 export const checkInt = (val, name = 'value', min, max) => {
   if (typeof val !== 'number' || !Number.isInteger(val)) throw `${name} must be an integer`;
