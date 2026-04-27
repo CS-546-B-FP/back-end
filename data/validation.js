@@ -390,6 +390,7 @@ export const checkIssueTags = (val, name = 'issueTags', options = {}) => {
     trim: true,
     caseInsensitive: true,
     allowedValues: REVIEW_ISSUE_TAG_VALUES,
+    maxItems,
     itemMaxLength: VALIDATION_LIMITS.issueTagMaxLength,
     ...arrayOptions
   });
@@ -401,10 +402,6 @@ export const checkIssueTags = (val, name = 'issueTags', options = {}) => {
       seen.add(tag);
       uniqueTags.push(tag);
     }
-  }
-
-  if (maxItems !== undefined && uniqueTags.length > maxItems) {
-    throw `${name} must contain at most ${maxItems} item${maxItems === 1 ? '' : 's'}`;
   }
 
   return uniqueTags;
