@@ -37,6 +37,11 @@ const seed = async () => {
     await buildingCollection.deleteMany({});
     await userCollection.deleteMany({});
 
+    await reviewCollection.createIndex(
+      { buildingId: 1, userId: 1 },
+      { unique: true, partialFilterExpression: { status: 'published' } }
+    );
+
     console.log("Old data removed.");
 
     // ----------------------------

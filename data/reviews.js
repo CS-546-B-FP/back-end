@@ -9,6 +9,9 @@ import {
   checkIssueTags
 } from './validation.js';
 
+export const DUPLICATE_REVIEW_ERROR =
+  'review already exists for this building; please edit your existing review instead';
+
 export const getReviewsByBuilding = async (buildingId) => {
   buildingId = checkId(buildingId, 'buildingId');
   const col = await reviews();
@@ -28,13 +31,31 @@ export const createReview = async (buildingId, userId, reviewText, rating, issue
   issueTags = checkIssueTags(issueTags, 'issueTags');
   const now = new Date();
   const col = await reviews();
-  const { insertedId } = await col.insertOne({
-    buildingId: new ObjectId(buildingId),
-    userId: new ObjectId(userId),
-    reviewText, rating, issueTags,
-    status: 'published',
-    createdAt: now, updatedAt: now
+  const buildingObjectId = new ObjectId(buildingId);
+  const userObjectId = new ObjectId(userId);
+  const existingReview = await col.findOne({
+    buildingId: buildingObjectId,
+    userId: userObjectId,
+    status: 'published'
   });
+
+  if (existingReview) {
+    throw DUPLICATE_REVIEW_ERROR;
+  }
+
+  let insertedId;
+  try {
+    ({ insertedId } = await col.insertOne({
+      buildingId: buildingObjectId,
+      userId: userObjectId,
+      reviewText, rating, issueTags,
+      status: 'published',
+      createdAt: now, updatedAt: now
+    }));
+  } catch (e) {
+    if (e?.code === 11000) throw DUPLICATE_REVIEW_ERROR;
+    throw e;
+  }
   return { _id: insertedId.toString() };
 };
 
