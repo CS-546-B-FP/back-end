@@ -43,13 +43,19 @@ export const createReview = async (buildingId, userId, reviewText, rating, issue
     throw DUPLICATE_REVIEW_ERROR;
   }
 
-  const { insertedId } = await col.insertOne({
-    buildingId: buildingObjectId,
-    userId: userObjectId,
-    reviewText, rating, issueTags,
-    status: 'published',
-    createdAt: now, updatedAt: now
-  });
+  let insertedId;
+  try {
+    ({ insertedId } = await col.insertOne({
+      buildingId: buildingObjectId,
+      userId: userObjectId,
+      reviewText, rating, issueTags,
+      status: 'published',
+      createdAt: now, updatedAt: now
+    }));
+  } catch (e) {
+    if (e?.code === 11000) throw DUPLICATE_REVIEW_ERROR;
+    throw e;
+  }
   return { _id: insertedId.toString() };
 };
 
