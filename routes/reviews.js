@@ -20,7 +20,8 @@ router.get(
       return reviewData.getReviewsByBuilding(buildingId);
     },
     {
-      getErrorStatus: getBuildingReviewErrorStatus
+      getErrorStatus: (error) =>
+        error === 'building not found' ? 404 : 400
     }
   )
 );
