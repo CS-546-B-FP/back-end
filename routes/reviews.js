@@ -5,6 +5,12 @@ import { createApiHandler } from '../utils/api-response.js';
 
 const router = Router();
 
+const getBuildingReviewErrorStatus = (error) => {
+  if (error === 'building not found') return 404;
+  if (error === reviewData.DUPLICATE_REVIEW_ERROR) return 409;
+  return 400;
+};
+
 router.get(
   '/buildings/:id/reviews',
   createApiHandler(
@@ -14,8 +20,7 @@ router.get(
       return reviewData.getReviewsByBuilding(buildingId);
     },
     {
-      getErrorStatus: (error) =>
-        error === 'building not found' ? 404 : 400
+      getErrorStatus: getBuildingReviewErrorStatus
     }
   )
 );
@@ -39,8 +44,7 @@ router.post(
     },
     {
       successStatus: 201,
-      getErrorStatus: (error) =>
-        error === 'building not found' ? 404 : 400
+      getErrorStatus: getBuildingReviewErrorStatus
     }
   )
 );
