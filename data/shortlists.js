@@ -33,10 +33,12 @@ export const addItemToShortlist = async (shortlistId, userId, buildingId) => {
   userId = checkId(userId, 'userId');
   buildingId = checkId(buildingId, 'buildingId');
   const col = await shortlists();
+  const buildingObjectId = new ObjectId(buildingId);
+
   const result = await col.findOneAndUpdate(
     { _id: new ObjectId(shortlistId), userId: new ObjectId(userId) },
     {
-      $addToSet: { items: { buildingId: new ObjectId(buildingId), privateNote: '' } },
+      $addToSet: { items: { buildingId: buildingObjectId, privateNote: '' } },
       $set: { updatedAt: new Date() }
     },
     { returnDocument: 'after' }
