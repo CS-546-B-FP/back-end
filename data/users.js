@@ -39,32 +39,29 @@ export const createUser = async (
   const emailNormalized = email.toLowerCase();
   const usernameNormalized = username.toLowerCase();
 
-  const col = await users();
-
-  if (
-    await col.findOne({
-      $or: [{ emailNormalized }, { usernameNormalized }],
-    })
-  ) {
-    throw "email or username already taken";
-  }
-
   const hashedPassword = await bcrypt.hash(password, 12);
   const now = new Date();
+  const col = await users();
 
-  const { insertedId } = await col.insertOne({
-    firstName,
-    lastName,
-    email,
-    emailNormalized,
-    username,
-    usernameNormalized,
-    hashedPassword,
-    role,
-    watchlist: [],
-    createdAt: now,
-    updatedAt: now,
-  });
+  let insertedId;
+  try {
+    ({ insertedId } = await col.insertOne({
+      firstName,
+      lastName,
+      email,
+      emailNormalized,
+      username,
+      usernameNormalized,
+      hashedPassword,
+      role,
+      watchlist: [],
+      createdAt: now,
+      updatedAt: now,
+    }));
+  } catch (e) {
+    if (e?.code === 11000) throw "email or username already taken";
+    throw e;
+  }
 
   return { _id: insertedId.toString() };
 };
