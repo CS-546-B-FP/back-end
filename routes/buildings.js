@@ -4,6 +4,11 @@ import { requireAuth } from '../middleware/auth.js';
 import { userData } from '../data/index.js';
 import { createApiHandler } from '../utils/api-response.js';
 import {
+  BUILDINGS_DEFAULT_LIMIT,
+  BUILDINGS_MAX_LIMIT,
+  BUILDINGS_SEARCH_MAX_LENGTH
+} from '../data/buildings.js';
+import {
   checkOptionalBoundedText,
   checkOptionalBorough,
   checkQueryInt
@@ -15,23 +20,20 @@ router.get(
   '/buildings',
   createApiHandler(
     async (req) => {
-      let { search, borough, page, limit } = req.query;
-      search = checkOptionalBoundedText(search, 'search', {
-        maxLength: 120,
+      const { search: rawSearch, borough: rawBorough, page: rawPage, limit: rawLimit } = req.query;
+      const search = checkOptionalBoundedText(rawSearch, 'search', {
+        maxLength: BUILDINGS_SEARCH_MAX_LENGTH,
         emptyValue: undefined
       });
-
-      borough = checkOptionalBorough(borough, 'borough');
-
-      page = checkQueryInt(page, 'page', {
+      const borough = checkOptionalBorough(rawBorough, 'borough');
+      const page = checkQueryInt(rawPage, 'page', {
         defaultValue: 1,
         min: 1
       });
-
-      limit = checkQueryInt(limit, 'limit', {
-        defaultValue: 20,
+      const limit = checkQueryInt(rawLimit, 'limit', {
+        defaultValue: BUILDINGS_DEFAULT_LIMIT,
         min: 1,
-        max: 100
+        max: BUILDINGS_MAX_LIMIT
       });
 
       return buildingData.getAllBuildings({
