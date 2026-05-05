@@ -7,10 +7,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Input and output paths
-const inputPath = path.join(__dirname, "raw-data", "queens_buildings_seed.csv");
 const outputDir = path.join(__dirname, "seed-data");
 const outputPath = path.join(outputDir, "buildings.json");
-
+const complaintsInputPath = path.join(__dirname, "raw-data", "complaints.csv");
+const inputPath = path.join(
+  __dirname,
+  "raw-data",
+  "Buildings_Subject_to_HPD_Jurisdiction_20260505.csv",
+);
+const MAX_BUILDINGS = 100;
 const normalizeBorough = (boro) => {
   if (!boro) return "";
   const value = boro.toString().trim().toUpperCase();
@@ -113,6 +118,50 @@ const dedupeBuildings = (buildings) => {
   return result;
 };
 
+const getComplaintBin = (row) =>
+  safeString(row.BIN || row.bin || row.BuildingID || row["Building ID"]);
+
+const getComplaintBBL = (row) =>
+  safeString(row.BBL || row.bbl || row.BoroBlockLot || row["Boro Block Lot"]);
+
+const getComplaintDate = (row) =>
+  safeString(
+    row.ReceivedDate || row["Received Date"] || row.receiveddate || row.Date,
+  );
+
+const transformComplaintToHousingRecord = (row) => {
+  const category = safeString(
+    row.MajorCategory ||
+      row["Major Category"] ||
+      row.major_category ||
+      row.ComplaintCategory ||
+      row["Complaint Category"] ||
+      row.Type ||
+      row.type,
+  );
+
+  const status = safeString(
+    row.ComplaintStatus ||
+      row["Complaint Status"] ||
+      row.complaint_status ||
+      row.Status ||
+      row.status,
+  );
+
+  const recordDateRaw = getComplaintDate(row);
+  const recordDate = recordDateRaw
+    ? new Date(recordDateRaw).toISOString()
+    : new Date().toISOString();
+
+  return {
+    sourceDataset: "Housing Maintenance Code Complaints and Problems",
+    recordType: "complaint",
+    category: category || "housing complaint",
+    status: status.toLowerCase() || "unknown",
+    recordDate,
+  };
+};
+
 const main = async () => {
   try {
     const csvText = fs.readFileSync(inputPath, "utf8");
@@ -125,17 +174,86 @@ const main = async () => {
 
     const usableRows = records.filter(isUsableRow);
     const transformed = usableRows.map(transformRowToBuilding);
-    const deduped = dedupeBuildings(transformed);
+    const deduped = dedupeBuildings(transformed).slice(0, MAX_BUILDINGS);
+    let finalBuildings = deduped;
 
+    if (fs.existsSync(complaintsInputPath)) {
+      const complaintsText = fs.readFileSync(complaintsInputPath, "utf8");
+
+      const complaintRecords = parse(complaintsText, {
+        columns: true,
+        skip_empty_lines: true,
+        bom: true,
+      });
+
+      const buildingsByBin = new Map();
+      const buildingsByBBL = new Map();
+
+      for (const building of finalBuildings) {
+        if (building.bin) buildingsByBin.set(building.bin, building);
+        if (building.bbl) buildingsByBBL.set(building.bbl, building);
+      }
+
+      let matchedComplaints = 0;
+
+      for (const complaint of complaintRecords) {
+        const bin = getComplaintBin(complaint);
+        const bbl = getComplaintBBL(complaint);
+
+        const building = buildingsByBin.get(bin) || buildingsByBBL.get(bbl);
+
+        if (!building) continue;
+
+        building.housingRecords.push(
+          transformComplaintToHousingRecord(complaint),
+        );
+        matchedComplaints += 1;
+      }
+
+      for (const building of finalBuildings) {
+        const complaintRecords = building.housingRecords.filter(
+          (record) => record.recordType === "complaint",
+        );
+
+        const heatComplaints = complaintRecords.filter((record) =>
+          record.category.toLowerCase().includes("heat"),
+        );
+
+        if (complaintRecords.length >= 3) {
+          building.riskSummary.highlights.push(
+            "Multiple housing complaints found",
+          );
+        }
+
+        if (heatComplaints.length > 0) {
+          building.riskSummary.highlights.push(
+            "Heat or hot water complaint history found",
+          );
+        }
+
+        building.riskSummary.highlights = [
+          ...new Set(building.riskSummary.highlights),
+        ];
+      }
+
+      console.log(`Read ${complaintRecords.length} complaint rows.`);
+      console.log(
+        `Matched ${matchedComplaints} complaints to seeded buildings.`,
+      );
+    }
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    fs.writeFileSync(outputPath, JSON.stringify(deduped, null, 2), "utf8");
+    fs.writeFileSync(
+      outputPath,
+      JSON.stringify(finalBuildings, null, 2),
+      "utf8",
+    );
 
     console.log(`Read ${records.length} rows from CSV.`);
     console.log(`Kept ${usableRows.length} usable rows.`);
-    console.log(`Wrote ${deduped.length} buildings to ${outputPath}.`);
+    console.log(`Wrote ${finalBuildings.length} buildings to ${outputPath}.`);
   } catch (error) {
     console.error("Failed to prepare seed data:", error);
     process.exit(1);
