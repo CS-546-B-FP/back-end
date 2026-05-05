@@ -20,6 +20,11 @@ const bedbugInputPath = path.join(
   "raw-data",
   "Bedbug_Reporting_20260505.csv",
 );
+const violationsInputPath = path.join(
+  __dirname,
+  "raw-data",
+  "Housing_Maintenance_Code_Violations_20260505.csv",
+);
 const MAX_BUILDINGS = 100;
 const normalizeBorough = (boro) => {
   if (!boro) return "";
@@ -208,6 +213,50 @@ const transformBedbugToHousingRecord = (row) => {
     recordDate,
   };
 };
+
+const getViolationBin = (row) =>
+  safeString(row.BIN || row.bin || row.BuildingID || row.buildingid);
+
+const getViolationBBL = (row) => safeString(row.BBL || row.bbl);
+
+const getViolationDate = (row) =>
+  safeString(
+    row.InspectionDate ||
+      row.inspectiondate ||
+      row["Inspection Date"] ||
+      row.NOVIssuedDate ||
+      row.novissueddate,
+  );
+
+const transformViolationToHousingRecord = (row) => {
+  const violationClass = safeString(row.Class || row.class);
+  const status = safeString(
+    row.CurrentStatus ||
+      row.currentstatus ||
+      row.ViolationStatus ||
+      row.violationstatus,
+  );
+
+  const description = safeString(
+    row.NOVDescription || row.novdescription || row.NovType || row.novtype,
+  );
+
+  const recordDateRaw = getViolationDate(row);
+  const recordDate = recordDateRaw
+    ? new Date(recordDateRaw).toISOString()
+    : new Date().toISOString();
+
+  return {
+    sourceDataset: "Housing Maintenance Code Violations",
+    recordType: "violation",
+    category: violationClass
+      ? `Class ${violationClass} violation`
+      : "housing violation",
+    status: status.toLowerCase() || "unknown",
+    recordDate,
+    description: description.slice(0, 300),
+  };
+};
 const main = async () => {
   try {
     const csvText = fs.readFileSync(inputPath, "utf8");
@@ -343,6 +392,78 @@ const main = async () => {
       console.log(`Read ${bedbugRecords.length} bedbug rows.`);
       console.log(
         `Matched ${matchedBedbugReports} bedbug reports to seeded buildings.`,
+      );
+    }
+    if (fs.existsSync(violationsInputPath)) {
+      const violationsText = fs.readFileSync(violationsInputPath, "utf8");
+
+      const violationRecords = parse(violationsText, {
+        columns: true,
+        skip_empty_lines: true,
+        bom: true,
+      });
+
+      const buildingsByBin = new Map();
+      const buildingsByBBL = new Map();
+
+      for (const building of finalBuildings) {
+        if (building.bin) buildingsByBin.set(building.bin, building);
+        if (building.bbl) buildingsByBBL.set(building.bbl, building);
+      }
+
+      let matchedViolations = 0;
+
+      for (const violation of violationRecords) {
+        const bin = getViolationBin(violation);
+        const bbl = getViolationBBL(violation);
+
+        const building = buildingsByBin.get(bin) || buildingsByBBL.get(bbl);
+
+        if (!building) continue;
+
+        building.housingRecords.push(
+          transformViolationToHousingRecord(violation),
+        );
+        matchedViolations += 1;
+      }
+
+      for (const building of finalBuildings) {
+        const violationReports = building.housingRecords.filter(
+          (record) => record.recordType === "violation",
+        );
+
+        const classCViolations = violationReports.filter((record) =>
+          record.category.toLowerCase().includes("class c"),
+        );
+
+        const openViolations = violationReports.filter((record) =>
+          record.status.includes("open"),
+        );
+
+        if (violationReports.length >= 3) {
+          building.riskSummary.highlights.push(
+            "Multiple housing violations found",
+          );
+        }
+
+        if (classCViolations.length > 0) {
+          building.riskSummary.highlights.push(
+            "Class C violation history found",
+          );
+        }
+
+        if (openViolations.length > 0) {
+          building.riskSummary.highlights.push("Open housing violations found");
+        }
+
+        building.riskSummary.highlights = [
+          ...new Set(building.riskSummary.highlights),
+        ];
+      }
+
+      console.log(`Read ${violationRecords.length} violation rows.`);
+      console.log(
+        `Matched ${matchedViolations} violations to seeded buildings.`,
       );
     }
     fs.writeFileSync(
