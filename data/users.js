@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { users } from '../config/mongoCollections.js';
+import { buildings } from '../config/mongoCollections.js';
 import { reviews } from '../config/mongoCollections.js';
 import { shortlists } from '../config/mongoCollections.js';
 import {
@@ -22,6 +23,18 @@ const normalizeLoginCredential = (value) =>
         field: "usernameNormalized",
         value: checkUsername(value, "username"),
       };
+
+const serializeProfile = (user) => ({
+  _id: user._id.toString(),
+  firstName: user.firstName,
+  lastName: user.lastName,
+  username: user.username,
+  email: user.email,
+  role: user.role,
+  watchlist: (user.watchlist || []).map((id) => id.toString()),
+  createdAt: user.createdAt,
+  updatedAt: user.updatedAt
+});
 
 export const createUser = async (
   firstName,
@@ -127,10 +140,7 @@ export const getProfile = async (id) => {
   const col = await users();
   const user = await col.findOne({ _id: new ObjectId(id) });
   if (!user) throw 'user not found';
-  const { hashedPassword, ...profile } = user;
-  profile._id = profile._id.toString();
-  profile.watchlist = (profile.watchlist || []).map(wid => wid.toString());
-  return profile;
+  return serializeProfile(user);
 };
 
 export const updateProfile = async (id, { firstName, lastName, email, username }) => {
@@ -139,20 +149,32 @@ export const updateProfile = async (id, { firstName, lastName, email, username }
   lastName = checkString(lastName, 'lastName');
   email = checkEmail(email);
   username = checkUsername(username, 'username');
+  const emailNormalized = email.toLowerCase();
+  const usernameNormalized = username.toLowerCase();
 
   const col = await users();
   const existing = await col.findOne({
     _id: { $ne: new ObjectId(id) },
     $or: [
-      { email: buildCaseInsensitiveExactMatch(email) },
-      { username: buildCaseInsensitiveExactMatch(username) }
+      { emailNormalized },
+      { usernameNormalized }
     ]
   });
   if (existing) throw 'email or username already taken';
 
   const result = await col.findOneAndUpdate(
     { _id: new ObjectId(id) },
-    { $set: { firstName, lastName, email, username, updatedAt: new Date() } },
+    {
+      $set: {
+        firstName,
+        lastName,
+        email,
+        emailNormalized,
+        username,
+        usernameNormalized,
+        updatedAt: new Date()
+      }
+    },
     { returnDocument: 'after' }
   );
   if (!result) throw 'user not found';
@@ -165,6 +187,28 @@ export const updateProfile = async (id, { firstName, lastName, email, username }
     email: result.email,
     role: result.role
   };
+};
+
+export const getUserWatchlist = async (id) => {
+  id = checkId(id);
+  const col = await users();
+  const user = await col.findOne({ _id: new ObjectId(id) });
+  if (!user) throw 'user not found';
+
+  const watchlistIds = user.watchlist || [];
+  if (watchlistIds.length === 0) return [];
+
+  const buildingCol = await buildings();
+  const watchlistBuildings = await buildingCol
+    .find({ _id: { $in: watchlistIds } })
+    .toArray();
+  const buildingsById = new Map(
+    watchlistBuildings.map((building) => [building._id.toString(), building])
+  );
+
+  return watchlistIds
+    .map((buildingId) => buildingsById.get(buildingId.toString()))
+    .filter(Boolean);
 };
 
 export const changePassword = async (id, currentPassword, newPassword) => {
