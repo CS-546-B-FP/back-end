@@ -5,12 +5,18 @@ import { createApiHandler, sendApiSuccess } from '../utils/api-response.js';
 
 const router = Router();
 
+const getUserErrorStatus = (error) => {
+  if (error === 'user not found') return 404;
+  if (error === 'forbidden') return 403;
+  return 400;
+};
+
 router.get(
   '/users/me',
   requireAuth,
   createApiHandler(
     async (req) => userData.getProfile(req.session.user._id),
-    { errorStatus: 400 }
+    { getErrorStatus: getUserErrorStatus }
   )
 );
 
@@ -26,7 +32,25 @@ router.put(
       req.session.user = updated;
       return updated;
     },
-    { errorStatus: 400 }
+    { getErrorStatus: getUserErrorStatus }
+  )
+);
+
+router.get(
+  '/users/:id/watchlist',
+  requireAuth,
+  createApiHandler(
+    async (req) => {
+      const targetId = req.params.id.trim();
+      const currentUserId = String(req.session.user._id);
+
+      if (targetId !== currentUserId && req.session.user.role !== 'admin') {
+        throw 'forbidden';
+      }
+
+      return userData.getUserWatchlist(targetId);
+    },
+    { getErrorStatus: getUserErrorStatus }
   )
 );
 
