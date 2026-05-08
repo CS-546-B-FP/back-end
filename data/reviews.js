@@ -144,6 +144,10 @@ const moderateReviewByAdmin = async (id, adminId, moderationStatus) => {
 
   if (!result) throw 'review not found';
 
+  if (status) {
+    await refreshBuildingReviewAggregation(result.buildingId.toString());
+  }
+
   return result;
 };
 
