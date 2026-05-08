@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import xss from 'xss';
-import { reviews } from '../config/mongoCollections.js';
+import { buildings, reviews } from '../config/mongoCollections.js';
 import {
   VALIDATION_LIMITS,
   checkBoundedText,
@@ -11,6 +11,49 @@ import {
 
 export const DUPLICATE_REVIEW_ERROR =
   'review already exists for this building; please edit your existing review instead';
+
+const getIssueTagFrequency = (reviewList) => {
+  const frequency = {};
+
+  for (const review of reviewList) {
+    for (const tag of review.issueTags || []) {
+      frequency[tag] = (frequency[tag] || 0) + 1;
+    }
+  }
+
+  return frequency;
+};
+
+export const refreshBuildingReviewAggregation = async (buildingId) => {
+  buildingId = checkId(buildingId, 'buildingId');
+  const buildingObjectId = new ObjectId(buildingId);
+  const reviewCol = await reviews();
+  const publishedReviews = await reviewCol
+    .find(
+      { buildingId: buildingObjectId, status: 'published' },
+      { projection: { rating: 1, issueTags: 1 } }
+    )
+    .toArray();
+
+  const reviewCount = publishedReviews.length;
+  const ratingTotal = publishedReviews.reduce((total, review) => total + review.rating, 0);
+  const averageRating = reviewCount === 0 ? 0 : Number((ratingTotal / reviewCount).toFixed(2));
+  const issueTagFrequency = getIssueTagFrequency(publishedReviews);
+  const buildingCol = await buildings();
+
+  await buildingCol.updateOne(
+    { _id: buildingObjectId },
+    {
+      $set: {
+        reviewCount,
+        averageRating,
+        issueTagFrequency
+      }
+    }
+  );
+
+  return { reviewCount, averageRating, issueTagFrequency };
+};
 
 export const getReviewsByBuilding = async (buildingId) => {
   buildingId = checkId(buildingId, 'buildingId');
@@ -56,6 +99,9 @@ export const createReview = async (buildingId, userId, reviewText, rating, issue
     if (e?.code === 11000) throw DUPLICATE_REVIEW_ERROR;
     throw e;
   }
+
+  await refreshBuildingReviewAggregation(buildingId);
+
   return { _id: insertedId.toString() };
 };
 
@@ -76,6 +122,9 @@ export const updateReview = async (id, userId, reviewText, rating, issueTags) =>
     { returnDocument: 'after' }
   );
   if (!result) throw 'review not found or not owned by user';
+
+  await refreshBuildingReviewAggregation(result.buildingId.toString());
+
   return result;
 };
 
@@ -89,5 +138,8 @@ export const deleteReview = async (id, userId) => {
     { returnDocument: 'after' }
   );
   if (!result) throw 'review not found or not owned by user';
+
+  await refreshBuildingReviewAggregation(result.buildingId.toString());
+
   return { deleted: true };
 };

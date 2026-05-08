@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { users, buildings, reviews, shortlists } from '../config/mongoCollections.js';
+import { refreshBuildingReviewAggregation } from './reviews.js';
 import {
   checkString,
   checkId,
@@ -312,10 +313,18 @@ export const deleteUser = async (id) => {
   if (!user) throw 'user not found';
 
   const reviewsCol = await reviews();
+  const userReviews = await reviewsCol
+    .find({ userId: oid }, { projection: { buildingId: 1 } })
+    .toArray();
+  const buildingIdsToRefresh = [
+    ...new Set(userReviews.map((review) => review.buildingId.toString()))
+  ];
+
   await reviewsCol.updateMany(
     { userId: oid },
     { $set: { status: 'deleted', updatedAt: new Date() } }
   );
+  await Promise.all(buildingIdsToRefresh.map(refreshBuildingReviewAggregation));
 
   const shortlistsCol = await shortlists();
   await shortlistsCol.deleteMany({ userId: oid });
