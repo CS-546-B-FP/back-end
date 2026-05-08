@@ -40,8 +40,7 @@ export const refreshBuildingReviewAggregation = async (buildingId) => {
   const averageRating = reviewCount === 0 ? 0 : Number((ratingTotal / reviewCount).toFixed(2));
   const issueTagFrequency = getIssueTagFrequency(publishedReviews);
   const buildingCol = await buildings();
-
-  await buildingCol.updateOne(
+  const result = await buildingCol.updateOne(
     { _id: buildingObjectId },
     {
       $set: {
@@ -51,6 +50,8 @@ export const refreshBuildingReviewAggregation = async (buildingId) => {
       }
     }
   );
+
+  if (result.matchedCount === 0) throw 'building not found';
 
   return { reviewCount, averageRating, issueTagFrequency };
 };
