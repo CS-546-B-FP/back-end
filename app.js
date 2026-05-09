@@ -3,6 +3,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import registerRoutes from './routes/index.js';
 import { apiRateLimiter } from './middleware/rate-limit.js';
+import { startRiskRecalculationJob } from './jobs/riskRecalculation.js';
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
@@ -21,6 +22,7 @@ app.use(session({
 app.use(apiRateLimiter);
 
 registerRoutes(app);
+startRiskRecalculation();
 
 app.listen(port, () => {
   console.log(`LeaseWise NYC back-end running on http://localhost:${port}`);
