@@ -9,12 +9,6 @@ const computeRiskScore = (building) => {
   );
 };
 
-const computeRiskLevel = (score) => {
-  if (score >= 15) return "High";
-  if (score >= 6) return "Medium";
-  return "Low";
-};
-
 export const runRiskRecalculation = async () => {
   const col = await buildings();
   const all = await col.find({}).toArray();
@@ -22,11 +16,11 @@ export const runRiskRecalculation = async () => {
   const now = new Date();
 
   const ops = all.map((b) => {
-    const riskScore = calculateRiskScore(b);
+    const riskScore = computeRiskScore(b);
 
     let riskLevel = 'Low';
-    if (riskScore >= 7) riskLevel = 'High';
-    else if (riskScore >= 4) riskLevel = 'Medium';
+    if (riskScore >= 15) riskLevel = 'High';
+    else if (riskScore >= 6) riskLevel = 'Medium';
 
     return col.updateOne(
       { _id: b._id },

@@ -42,6 +42,15 @@ router.get(
   )
 );
 
+router.get(
+  '/admin/reviews',
+  requireAdmin,
+  createApiHandler(
+    async () => reviewData.getAllReviewsForAdmin({ limit: 200 }),
+    { errorStatus: 400 }
+  )
+);
+
 router.patch(
   '/admin/users/:id/ban',
   requireAdmin,
