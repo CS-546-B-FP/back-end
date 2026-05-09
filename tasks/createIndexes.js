@@ -50,7 +50,7 @@ const createIndexes = async () => {
   );
 
   await reviewCollection.createIndex(
-    { buildingId: 1, userId: 1 },
+    { buildingId: 1, userId: 1, status: 1 },
     {
       unique: true,
       partialFilterExpression: { status: "published" },
