@@ -44,13 +44,28 @@ const createIndexes = async () => {
     { name: "building_owner_name_index" },
   );
 
+  await buildingCollection.createIndex(
+    { borough: 1, zipCode: 1 },
+    { name: "building_borough_zip_code_index" },
+  );
+
+  await buildingCollection.createIndex(
+    { ownerName: 1, borough: 1 },
+    { name: "building_owner_borough_index" },
+  );
+
+  await buildingCollection.createIndex(
+    { riskLevel: 1, borough: 1 },
+    { name: "building_risk_level_borough_index" },
+  );
+
   await reviewCollection.createIndex(
     { buildingId: 1, status: 1, createdAt: -1 },
     { name: "review_building_status_created_index" },
   );
 
   await reviewCollection.createIndex(
-    { buildingId: 1, userId: 1 },
+    { buildingId: 1, userId: 1, status: 1 },
     {
       unique: true,
       partialFilterExpression: { status: "published" },
