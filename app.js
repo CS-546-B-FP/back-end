@@ -22,7 +22,8 @@ app.use(session({
 app.use(apiRateLimiter);
 
 registerRoutes(app);
-startRiskRecalculation();
+const riskJobHandle = startRiskRecalculation();
+process.on('SIGTERM', () => clearInterval(riskJobHandle));
 
 app.listen(port, () => {
   console.log(`LeaseWise NYC back-end running on http://localhost:${port}`);

@@ -237,7 +237,6 @@ export const updateBuilding = async (id, data, adminId) => {
     { _id: new ObjectId(id) },
     {
       $set: {
-        ...data,
         ...normalized,
         updatedByAdminId: new ObjectId(adminId),
         updatedAt: new Date()
